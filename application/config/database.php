@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'test',
-	'username' => 'test',
-	'password' => 'test',
+	'hostname' => 'libappdev.latrobe.edu.au',
+	'username' => 'lib_admin',
+	'password' => 'toyta.com.au',
 	'database' => '',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

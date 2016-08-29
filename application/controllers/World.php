@@ -18,7 +18,7 @@ class World extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+  public function index()
 	{
 		echo "Hello world";
 	}
@@ -29,4 +29,21 @@ class World extends CI_Controller {
     echo $city."<br>";
     echo $country;
   }
+  /*public function _remap($method, $params = array())
+  {
+        if ($method === 'check')
+        {
+                //$this->$method();
+                return call_user_func_array(array($this, $method), $params);
+        }
+        else
+        {
+          $newmethod='check';
+          if (method_exists($this, $newmethod))
+          {
+                 return call_user_func_array(array($this, $newmethod), $params);
+          }
+            //$this->index();
+        }
+  }*/
 }
