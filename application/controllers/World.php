@@ -20,14 +20,18 @@ class World extends CI_Controller {
 	 */
   public function index()
 	{
-		echo "Hello world";
+    $this->load->model("World_model");
+    $data['world']=$this->World_model->get_all();
+    $this->load->view('worldview',$data);
+    //echo "Hello world";
 	}
   public function show(){
     echo "I can show my skills";
   }
   public function check($country, $city){
-    echo $city."<br>";
-    echo $country;
+    $this->load->view('worldview',array("country"=>$country,"city"=>$city));
+    //echo $city."<br>";
+    //echo $country;
   }
   /*public function _remap($method, $params = array())
   {
