@@ -12,10 +12,10 @@
   <body>
     <section>
       <? foreach ($world as $country) {?>
-      <h3><? echo $country['country_name']; ?></h3>
+      <h3><? echo element('country_name',$country); ?></h3>
       <ul>
         <? foreach ($country['cities'] as $city) { ?>
-        <li><?= $city['city_name']; ?></li>
+        <li><?= element('city_name',$city); ?></li>
         <?  } ?>
       </ul>
       <? } ?>
