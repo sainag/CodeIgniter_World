@@ -33,5 +33,36 @@ class World_model extends CI_Model {
     $query=$this->db->get('country');
     return $query->result();
   }
+  public function add_to_world(){
+    $country=array('name'=>$this->input->post('country'),
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'));
+
+    $query=$this->db->get_where('country',array('name'=>$this->input->post('country')));
+    $country_id=0;
+    if($query->num_rows()){
+      foreach ($query->result() as $row)
+      {
+        $country_id=$row->country_id;
+      }
+    }
+    else
+    {
+      $query_insert=$this->db->insert('country',$country);
+      $country_id=$this->db->insert_id();
+    }
+    $city=array('name'=>$this->input->post('city'),
+                'country_id'=>$country_id,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'));
+    $query=$this->db->get_where('city',array('name'=>$this->input->post('city')));
+    if($query->num_rows()){
+      return;
+    }
+    else {
+      $query_insert=$this->db->insert('city',$city);
+      return;
+    }
+  }
 }
 ?>

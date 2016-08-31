@@ -25,29 +25,22 @@ class World extends CI_Controller {
     $this->load->view('worldview',$data);
     //echo "Hello world";
 	}
-  public function show(){
-    echo "I can show my skills";
+  public function create(){
+    $this->load->view('create');
   }
-  public function check($country, $city){
-    $this->load->view('worldview',array("country"=>$country,"city"=>$city));
-    //echo $city."<br>";
-    //echo $country;
+  public function store(){
+    $this->form_validation->set_rules('country', 'Country', 'required');
+    $this->form_validation->set_rules('city', 'City', 'required');
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->load->view('create');
+    }
+    else
+    {
+      $this->load->model("World_model");
+      $this->World_model->add_to_world();
+      $this->index();
+    }
+
   }
-  /*public function _remap($method, $params = array())
-  {
-        if ($method === 'check')
-        {
-                //$this->$method();
-                return call_user_func_array(array($this, $method), $params);
-        }
-        else
-        {
-          $newmethod='check';
-          if (method_exists($this, $newmethod))
-          {
-                 return call_user_func_array(array($this, $newmethod), $params);
-          }
-            //$this->index();
-        }
-  }*/
 }
