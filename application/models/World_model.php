@@ -38,15 +38,9 @@ class World_model extends CI_Model {
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'));
 
-    $query=$this->db->get_where('country',array('name'=>$this->input->post('country')));
-    $country_id=0;
-    if($query->num_rows()){
-      foreach ($query->result() as $row)
-      {
-        $country_id=$row->country_id;
-      }
-    }
-    else
+    $query=$this->is_country_exist($this->input->post('country'));
+    $country_id=$query;
+    if(! $country_id)
     {
       $query_insert=$this->db->insert('country',$country);
       $country_id=$this->db->insert_id();
@@ -55,13 +49,32 @@ class World_model extends CI_Model {
                 'country_id'=>$country_id,
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'));
-    $query=$this->db->get_where('city',array('name'=>$this->input->post('city')));
-    if($query->num_rows()){
+    $query=$this->is_city_exist($this->input->post('city'));
+    if($query){
       return;
     }
     else {
       $query_insert=$this->db->insert('city',$city);
       return;
+    }
+  }
+  public function is_country_exist($country){
+    $query=$this->db->get_where('country',array('name'=>$country));
+    if($query->num_rows()){
+      $row = $query->row();
+      return $row->country_id;
+    }
+    else {
+      return FALSE;
+    }
+  }
+  public function is_city_exist($city){
+    $query=$this->db->get_where('city',array('name'=>$city));
+    if($query->num_rows()){
+      return TRUE;
+    }
+    else {
+      return FALSE;
     }
   }
 }
