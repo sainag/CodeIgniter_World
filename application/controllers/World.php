@@ -23,8 +23,7 @@ class World extends CI_Controller {
     $this->load->model("World_model");
     $data['world']=$this->World_model->get_all();
     $this->load->view('worldview',$data);
-    //echo "Hello world";
-	}
+  }
   public function create(){
     $this->load->view('create');
   }
@@ -41,6 +40,8 @@ class World extends CI_Controller {
       $this->World_model->add_to_world();
       $this->index();
     }
-
+  }
+  public function show($country){
+    
   }
 }

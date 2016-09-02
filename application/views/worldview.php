@@ -10,9 +10,10 @@
     </style>
   </head>
   <body>
+    <?php $this->view('_form');?>
     <section>
       <? foreach ($world as $country) {?>
-      <h3><? echo element('country_name',$country); ?></h3>
+      <h3><? echo anchor('world/show/'.element('country_name',$country),element('country_name',$country)); ?></h3>
       <ul>
         <? foreach ($country['cities'] as $city) { ?>
         <li><?= element('city_name',$city); ?></li>
