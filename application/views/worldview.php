@@ -13,10 +13,16 @@
     <?php $this->view('_form');?>
     <section>
       <? foreach ($world as $country) {?>
-      <h3><? echo anchor('world/show/'.element('country_name',$country),element('country_name',$country)); ?></h3>
+      <h3>
+        <? echo anchor('world/show/'.element('country_name',$country),element('country_name',$country)); ?>
+        <? echo anchor('world/'.element('country_id',$country).'/edit',img(asset_url().'images/icon_edit.png'),'title="Edit"'); ?>
+        <? echo anchor('world/country/'.element('country_id',$country).'/delete',img(asset_url().'images/icon_delete.png'),'title="Delete"'); ?>
+      </h3>
       <ul>
         <? foreach ($country['cities'] as $city) { ?>
-        <li><?= element('city_name',$city); ?></li>
+        <li>
+          <?= element('city_name',$city); ?>
+        </li>
         <?  } ?>
       </ul>
       <? } ?>
